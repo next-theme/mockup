@@ -106,11 +106,17 @@ deploy:
   type: ''
 
 theme_config:
+  custom_file_path:
+    style: source/_data/styles.styl
+
   menu:
     home: / || fa fa-home
     archives: /archives/ || fa fa-archive
     categories: /categories/ || fa fa-th
     tags: /tags/ || fa fa-tags
+
+  font:
+    enable: true
 
   local_search:
     enable: true

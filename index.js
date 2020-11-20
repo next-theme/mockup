@@ -33,20 +33,23 @@ async function main() {
         createServer({
             root: path.join(__dirname, `public/${name}`)
         }).listen(port);
-        createPanel(`http://localhost:${port++}/`);
+        createPanel(name === "Pisces", port++);
     }
 }
 
-function createPanel(url) {
+function createPanel(pisces, port) {
 
     const mainWindow = new BrowserWindow({
-        width: 1200,
-        height: 800,
+        width: 1000,
+        height: 300,
         fullscreenable: false,
         title: "NexT"
     });
 
-    mainWindow.loadURL(url);
+    // https://github.com/electron/electron/issues/24505
+    mainWindow.loadURL(pisces ? `http://localhost:${port}/` : `http://127.0.0.1:${port}/`).then(() => {
+        if (pisces) mainWindow.webContents.setZoomFactor(1.2);
+    });
 }
 
 app.on("window-all-closed", () => {
