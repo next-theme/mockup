@@ -109,6 +109,8 @@ theme_config:
   custom_file_path:
     style: source/_data/styles.styl
 
+  darkmode: true
+
   menu:
     home: / || fa fa-home
     archives: /archives/ || fa fa-archive
