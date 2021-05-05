@@ -13,7 +13,7 @@
     "hexo-generator-index": "2.0.0",
     "hexo-renderer-marked": "3.3.0",
     "hexo-renderer-stylus": "2.0.1",
-    "hexo-theme-next": "8.0.2",
+    "hexo-theme-next": "8.4.0",
     "http-server": "0.12.3"
   },
   "devDependencies": {
