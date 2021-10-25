@@ -1,13 +1,19 @@
 const path = require("path");
 const fs = require("fs");
-const { fork } = require("child_process");
+const { fork, spawn } = require("child_process");
 const { createServer } = require("http-server");
 const { app, BrowserWindow } = require("electron");
+const yaml = require("js-yaml");
 
 app.commandLine.appendSwitch("disable-http-cache");
 
 async function generate(name) {
-    fs.writeFileSync(path.join(__dirname, "_config.next.yml"), `scheme: ${name}`);
+    fs.writeFileSync(path.join(__dirname, "_config.next.yml"), yaml.dump({
+        scheme: name,
+        motion: {
+            enable: false
+        }
+    }));
     await new Promise((resolve, reject) => {
         const hexo = fork(path.join(__dirname, "node_modules/.bin/hexo"), ["g"], {
             stdio: "inherit",
@@ -33,12 +39,12 @@ async function main() {
         createServer({
             root: path.join(__dirname, `public/${name}`)
         }).listen(port);
-        createPanel(name === "Pisces", port++);
+        createPanel(name, port++);
     }
 }
 
-function createPanel(pisces, port) {
-
+function createPanel(name, port) {
+    const pisces = name === "Pisces";
     const mainWindow = new BrowserWindow({
         width: 1000,
         height: 300,
@@ -49,6 +55,10 @@ function createPanel(pisces, port) {
     // https://github.com/electron/electron/issues/24505
     mainWindow.loadURL(pisces ? `http://localhost:${port}/` : `http://127.0.0.1:${port}/`).then(() => {
         if (pisces) mainWindow.webContents.setZoomFactor(1.2);
+        spawn("/usr/sbin/screencapture", [`-l${mainWindow.getMediaSourceId().split(":")[1]}`, "-T5", `assets/${name}.png`], {
+            stdio: "inherit",
+            cwd: __dirname
+        });
     });
 }
 

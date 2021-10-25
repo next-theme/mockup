@@ -1,1 +1,3 @@
 scheme: Gemini
+motion:
+  enable: false
