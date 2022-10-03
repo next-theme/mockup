@@ -14,7 +14,7 @@
     "hexo-renderer-marked": "4.0.0",
     "hexo-renderer-stylus": "2.0.1",
     "hexo-theme-next": "8.13.1",
-    "http-server": "0.12.3"
+    "http-server": "0.13.0"
   },
   "devDependencies": {
     "electron": "12.0.6"
