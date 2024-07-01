@@ -9,7 +9,7 @@
     "version": "5.4.0"
   },
   "dependencies": {
-    "hexo": "6.3.0",
+    "hexo": "7.3.0",
     "hexo-generator-index": "2.0.0",
     "hexo-renderer-marked": "5.0.0",
     "hexo-renderer-stylus": "2.1.0",
